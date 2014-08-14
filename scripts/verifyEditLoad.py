@@ -69,7 +69,7 @@ DB Schema:
      `total` decimal(15,2) DEFAULT NULL
    )
 
-Dependancies:
+Dependencies:
 
   Connector/Python driver: http://dev.mysql.com/downloads/connector/python/
   A running MySQL DB containing a schema with the appropriate tables.
