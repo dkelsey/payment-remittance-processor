@@ -10,7 +10,7 @@ shell> ./verifyEditLoad.py ./BCLDB_Payment_Remittance_75467_2014-8-18.csv
 ```
 
 
-The file is processed in the following manner:
+#The file is processed in the following manner:
 
 * It is tested to ensure it contains expected header and data headers.
 * Header data is loaded into a vector and any formatting/converstions applied
