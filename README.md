@@ -19,14 +19,15 @@ shell> ./verifyEditLoad.py ./BCLDB_Payment_Remittance_75467_2014-8-18.csv
    the data is loaded into a mysql DB.
 
 #DB Schema:
-   **paymentremittance:**
-   * represents paymentremittance file.
-   * contains the header data
-   * paymentremittanceid uniquely identifies each record.
 
-   **paymentremittancedata:**
-   * represents paymentremittance data.
-   * paymentremittanceid relates each record to the source file.
+**paymentremittance:**
+* represents paymentremittance file.
+* contains the header data.
+* paymentremittanceid uniquely identifies each record.
+
+**paymentremittancedata:**
+* represents paymentremittance data.
+* paymentremittanceid relates each record to the source file.
 
 ```sql
    CREATE TABLE `paymentremittance` (
