@@ -66,6 +66,5 @@ The file is processed in the following manner:
 #Dependancies:
 
 
-Connector/Python driver: http://dev.mysql.com/downloads/connector/python/
-
-A running MySQL DB containing a schema with the appropriate tables.
+-Connector/Python driver: http://dev.mysql.com/downloads/connector/python/
+-A running MySQL DB containing a schema with the appropriate tables.
