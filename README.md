@@ -3,8 +3,11 @@ payment-remittance-processor
 
 Script which parses, verifies and loads British Columbia Liquor Distribution (BCLD) Payment Remittance reports into a DB
 
-Usage: shell> ./verifyEditLoad.py ./BCLDB_Payment_Remittance_75467_2014-8-18.csv
+Usage: 
 ======
+
+'''shell> ./verifyEditLoad.py ./BCLDB_Payment_Remittance_75467_2014-8-18.csv'''
+
 
 The file is processed in the following manner:
 
@@ -22,6 +25,7 @@ DB Schema:
    paymentremittancedata : represents paymentremittance data.
                            paymentremittanceid relates each record to the source file.
 
+'''sql
    CREATE TABLE `paymentremittance` (
      `paymentremittanceid` int(11) NOT NULL AUTO_INCREMENT,
      `payeename` varchar(64) DEFAULT NULL,
@@ -56,7 +60,7 @@ DB Schema:
      `containerDeposit` varchar(64) DEFAULT NULL,
      `freightAllowance` varchar(64) DEFAULT NULL,
      `total` decimal(15,2) DEFAULT NULL
-   )
+   )'''
 
 Dependancies:
 =============
