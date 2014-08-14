@@ -1,0 +1,66 @@
+
+def parse_date
+
+''''''''''''''''''
+DATA
+''''''''''''''''''
+for latest remittance files
+headerTemplate : expected headers
+headerConverters: parsers to edit header data
+headerTitle2DBColumnName: hash file header => db column
+
+for older remittance files
+headerTemplate2 : expected headers
+headerConverters2: parsers to edit header data
+header2Title2DBColumnName: hash file header => db column
+
+for data : mostly common to all files though
+  some columns are missing
+  some columns have different names
+dataHeaderTemplate : expected headers
+dataHeaderConverters : parsers to edit data values 
+   eg, convert strings to dates
+dataHeader2DBColumnName : hash data header => db column
+  note duplcates: 'Size' and 'Pack' both => 'size'
+                  'Cost' and 'Item Cost' both => 'cost'
+                  'Store' and 'Store Number' both => 'store'
+                  'Product' and 'Product Description' both => 'product'
+
+''''''''''''''''''
+the Code
+''''''''''''''''''
+for each file:
+   validate header : # of headers and order
+      side affect : header tuple of headers,
+                    headerValues tuple of header values
+      raises NameError if there is a problem
+   validate dataHeader: # of headers and order (?)
+      can have fewer headers than expected; defaults will be set
+      side affect : dataHeader tuple of dataHeaders
+
+   '''''''''''''''''''''''''''''''
+   more DATA for MySQL statements
+   '''''''''''''''''''''''''''''''
+   add_paymentremettance: tuple( 'str with insert statement')
+   data_paymentremettance: dictionary( dbcolumn => 'default value' )
+   ''''''''''''''''''''''''''''''''''''''
+   CODE : INSERT paymentremittance record
+   ''''''''''''''''''''''''''''''''''''''
+   insert paymentremittance record (using values from file header)
+      update the data_paymentremittance dictionary with appropriate
+         values from headerValues
+      execute the insert statement with data.
+      retreive the paymentremittanceid
+   '''''''''''''''''''''''''''''''
+   more DATA for MySQL statements
+   '''''''''''''''''''''''''''''''
+   add_paymentremittancedata: tuple('str of insert statement')
+   data_paymentremittancedata: dictionary(dbcolumn => 'default value')
+   ''''''''''''''''''''''''''''''''''''''
+   CODE : INSERT paymentremittancedata records
+   ''''''''''''''''''''''''''''''''''''''
+   insert paymentremittancedata records (using values from file)
+      update data_paymentremittancedata dictionary with appropriate
+         values from data record from file
+      execute the insert statement with data
+
