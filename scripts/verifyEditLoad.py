@@ -386,7 +386,7 @@ for fname in sys.argv[1:]:
       " %(containerDeposit)s, "
       " %(freightAllowance)s, "
       " %(total)s)" )
-   data_paymentremittancedata = {
+   data_paymentremittancedataTemplate = {
       "paymentremittanceid"  : paymentremittanceid,
       "invoiceNumber"        : 'N/A',
       "orderType"            : 'N/A',
@@ -417,6 +417,7 @@ for fname in sys.argv[1:]:
          dataValues = ()
          dataValues = tuple(line.replace('"','').strip().split(','))
          dataValues = tuple(d.strip() for d in dataValues)
+         data_paymentremittancedata = data_paymentremittancedataTemplate.copy()
          for h,v in zip(dataHeader,dataValues):
             data_paymentremittancedata[dataHeader2DBColumnName[h]] = dataHeaderConverters[h](v)
          cursor.execute(add_paymentremittancedata,data_paymentremittancedata)
@@ -428,6 +429,7 @@ for fname in sys.argv[1:]:
          dataValues = ()
          dataValues = tuple(line.replace('"','').strip().split(','))
          dataValues = tuple(d.strip() for d in dataValues)
+         data_paymentremittancedata = data_paymentremittancedataTemplate.copy()
          for h,v in zip(dataHeader,dataValues):
             data_paymentremittancedata[dataHeader2DBColumnName[h]] = dataHeaderConverters[h](v)
          cursor.execute(add_paymentremittancedata,data_paymentremittancedata)
