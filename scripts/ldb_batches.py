@@ -264,7 +264,7 @@ for fname in sys.argv[1:]:
    batchid = cursor.lastrowid
    f = open(fname, 'r')
    data_batchesdataTemplate["batchid"] = batchid
-   for line in f.readlines()[1:-3]:
+   for line in f.readlines()[1:]:
       dataValues = ()
       dataValues = tuple(line.replace('"','').strip().split(','))
       dataValues = tuple(d.strip() for d in dataValues)
