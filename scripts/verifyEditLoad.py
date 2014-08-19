@@ -40,6 +40,7 @@ DB Schema:
      `payeesite` varchar(64) DEFAULT NULL,
      `paymentnumber` int(11) DEFAULT NULL,
      `paymentdate` date DEFAULT NULL,
+     `filename` varchar(32) DEFAULT NULL,
      PRIMARY KEY (`paymentremittanceid`)
    )
 
@@ -76,13 +77,14 @@ Dependencies:
 
 """
 
-import sys
+import os
 import re
+import sys
 import datetime
 import mysql.connector
 from utils.parsers import string_to_date
 
-cnx = mysql.connector.connect(user='root', database='bvb2')
+cnx = mysql.connector.connect(user='root', database='bvb')
 cursor = cnx.cursor()
 
 #
@@ -314,16 +316,20 @@ for fname in sys.argv[1:]:
    
    add_paymentremittance = (
      "INSERT INTO paymentremittance "
-     " (payeename, payeeid, payeesite, paymentnumber, paymentdate ) "
-     " VALUES ( %(payeename)s, %(payeeid)s, %(payeesite)s, %(paymentnumber)s, %(paymentdate)s)" )
+     " (payeename, payeeid, payeesite, paymentnumber, paymentdate, filename ) "
+     " VALUES ( %(payeename)s, %(payeeid)s, %(payeesite)s, %(paymentnumber)s, %(paymentdate)s, %(filename)s)" )
    
    data_paymentremittance = {
-      "payeename": '',
-      "payeeid": 0,
-      "payeesite": '',
+      "payeename"    : '',
+      "payeeid"      : 0,
+      "payeesite"    : '',
       "paymentnumber": 0,
-      "paymentdate": datetime.datetime.strptime('01-JAN-2000', "%d-%b-%Y").date(),
+      "paymentdate"  : datetime.datetime.strptime('01-JAN-2000', "%d-%b-%Y").date(),
+      "filename"     : 'N/A',
    }
+   
+   if os.path.isfile(fname) :
+      data_paymentremittance['filename'] = os.path.basename(fname)
    
    if len(header) == len(headerTemplate2):  # does the file have a header with only 3 records
       for h, v in zip(header,headerValues):
@@ -331,7 +337,6 @@ for fname in sys.argv[1:]:
    else:
       for h, v in zip(header,headerValues):
          data_paymentremittance[headerTitle2DBColumnName[h]] = headerConverters[h](v)
-   print data_paymentremittance
    
    cursor.execute(add_paymentremittance,data_paymentremittance)
    cnx.commit()
