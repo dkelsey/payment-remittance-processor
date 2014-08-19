@@ -7,7 +7,6 @@
 |PRIMARY KEY (`batchid`)                        | indicates it is a primary key              |
 ----------------------------------------------------------------------------------------------
 
-
 -----------------------------------------------------------------------------------------
 | TABLE `ldb_batchesdata`                                                               |
 -----------------------------------------------------------------------------------------
@@ -19,9 +18,9 @@
 | `original_invoice_number`  int(11) DEFAULT NULL,       | e.g. 20140317 or 0           |
 | `customer_number`          int(11) DEFAULT NULL,       | e.g. 127464                  |
 | `customer_type`            varchar(32) DEFAULT NULL,   | e.g. BLK, COU, LIC, LRS, RAS |
-| `customer_name`            varchar(32) DEFAULT NULL,   | e.g. 'Arts on the Fly'       |
+| `customer_name`            varchar(80) DEFAULT NULL,   | e.g. 'Arts on the Fly'       |
 | `customer_phone_Number`    varchar(32) DEFAULT NULL,   | e.g. 778-961-0211            |
-| `customer_address`         varchar(32) DEFAULT NULL,   | e.g. 2708 Pinnacles Road     |
+| `customer_address`         varchar(80) DEFAULT NULL,   | e.g. 2708 Pinnacles Road     |
 | `customer_city`            varchar(32) DEFAULT NULL,   |                              |
 | `customer_province`        varchar(32) DEFAULT NULL,   |                              |
 | `customer_postal_code`     varchar(7) DEFAULT NULL,    |                              |

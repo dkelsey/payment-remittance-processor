@@ -35,7 +35,7 @@ CREATE TABLE `ldb_batches` (
   `file_name` varchar(64) DEFAULT NULL,
   `process_date` date DEFAULT NULL,
   PRIMARY KEY (`batchid`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -54,9 +54,9 @@ CREATE TABLE `ldb_batchesdata` (
   `original_invoice_number` int(11) DEFAULT NULL,
   `customer_number` int(11) DEFAULT NULL,
   `customer_type` varchar(32) DEFAULT NULL,
-  `customer_name` varchar(32) DEFAULT NULL,
+  `customer_name` varchar(80) DEFAULT NULL,
   `customer_phone_Number` varchar(32) DEFAULT NULL,
-  `customer_address` varchar(32) DEFAULT NULL,
+  `customer_address` varchar(80) DEFAULT NULL,
   `customer_city` varchar(32) DEFAULT NULL,
   `customer_province` varchar(32) DEFAULT NULL,
   `customer_postal_code` varchar(7) DEFAULT NULL,
@@ -87,7 +87,7 @@ CREATE TABLE `paymentremittance` (
   `paymentdate` date DEFAULT NULL,
   `filename` varchar(64) DEFAULT NULL,
   PRIMARY KEY (`paymentremittanceid`)
-) ENGINE=InnoDB AUTO_INCREMENT=59 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -133,4 +133,4 @@ CREATE TABLE `paymentremittancedata` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2014-08-18 18:03:42
+-- Dump completed on 2014-08-19 16:51:21
