@@ -418,27 +418,33 @@ for fname in sys.argv[1:]:
    }
    if len(header) == len(headerTemplate2): # does the file only have the 3 column header
       f = open(fname, 'r')
-      for line in f.readlines()[5:-3]:
+      for line in f.readlines()[5:]:
          dataValues = ()
-         dataValues = tuple(line.replace('"','').strip().split(','))
-         dataValues = tuple(d.strip() for d in dataValues)
-         data_paymentremittancedata = data_paymentremittancedataTemplate.copy()
-         for h,v in zip(dataHeader,dataValues):
-            data_paymentremittancedata[dataHeader2DBColumnName[h]] = dataHeaderConverters[h](v)
-         cursor.execute(add_paymentremittancedata,data_paymentremittancedata)
-         cnx.commit()
+         if 80 > len(line) : # file final lines are inconsistent.  use line length to determint if the line is data
+            print line
+         else:
+            dataValues = tuple(line.replace('"','').strip().split(','))
+            dataValues = tuple(d.strip() for d in dataValues)
+            data_paymentremittancedata = data_paymentremittancedataTemplate.copy()
+            for h,v in zip(dataHeader,dataValues):
+               data_paymentremittancedata[dataHeader2DBColumnName[h]] = dataHeaderConverters[h](v)
+            cursor.execute(add_paymentremittancedata,data_paymentremittancedata)
+            cnx.commit()
       f.close()
    else:
       f = open(fname, 'r')
-      for line in f.readlines()[7:-3]: 
+      for line in f.readlines()[7:]: 
          dataValues = ()
-         dataValues = tuple(line.replace('"','').strip().split(','))
-         dataValues = tuple(d.strip() for d in dataValues)
-         data_paymentremittancedata = data_paymentremittancedataTemplate.copy()
-         for h,v in zip(dataHeader,dataValues):
-            data_paymentremittancedata[dataHeader2DBColumnName[h]] = dataHeaderConverters[h](v)
-         cursor.execute(add_paymentremittancedata,data_paymentremittancedata)
-         cnx.commit()
+         if 80 > len(line) : # file final lines are inconsistent.  use line length to determint if the line is data
+            print line
+         else:
+            dataValues = tuple(line.replace('"','').strip().split(','))
+            dataValues = tuple(d.strip() for d in dataValues)
+            data_paymentremittancedata = data_paymentremittancedataTemplate.copy()
+            for h,v in zip(dataHeader,dataValues):
+               data_paymentremittancedata[dataHeader2DBColumnName[h]] = dataHeaderConverters[h](v)
+            cursor.execute(add_paymentremittancedata,data_paymentremittancedata)
+            cnx.commit()
       f.close()
 cursor.close()
 cnx.close()
