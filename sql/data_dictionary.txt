@@ -1,0 +1,78 @@
+----------------------------------------------------------------------------------------------
+| TABLE `ldb_batches`                                                                        |
+----------------------------------------------------------------------------------------------
+|`batchid`      int(11) NOT NULL AUTO_INCREMENT,| unique id to identify batch file           |
+|`file_name`    varchar(64) DEFAULT NULL,       | string representing the file name          |
+|`process_date` date DEFAULT NULL,              | date the file is processed by the script   |
+|PRIMARY KEY (`batchid`)                        | indicates it is a primary key              |
+----------------------------------------------------------------------------------------------
+
+
+-----------------------------------------------------------------------------------------
+| TABLE `ldb_batchesdata`                                                               |
+-----------------------------------------------------------------------------------------
+| `batchid`                  int(11) DEFAULT NULL,       | fk to ldb_batches.batchid    |
+| `store_number`             int(11) DEFAULT NULL,       | integer store number         |
+| `transaction_type`         varchar(32) DEFAULT NULL,   | e.g. 'Sale', 'Return'        |
+| `transaction_date`         date DEFAULT NULL,          |                              |
+| `invoice_reference_number` int(11) DEFAULT NULL,       | e.g. 20130365                |
+| `original_invoice_number`  int(11) DEFAULT NULL,       | e.g. 20140317 or 0           |
+| `customer_number`          int(11) DEFAULT NULL,       | e.g. 127464                  |
+| `customer_type`            varchar(32) DEFAULT NULL,   | e.g. BLK, COU, LIC, LRS, RAS |
+| `customer_name`            varchar(32) DEFAULT NULL,   | e.g. 'Arts on the Fly'       |
+| `customer_phone_Number`    varchar(32) DEFAULT NULL,   | e.g. 778-961-0211            |
+| `customer_address`         varchar(32) DEFAULT NULL,   | e.g. 2708 Pinnacles Road     |
+| `customer_city`            varchar(32) DEFAULT NULL,   |                              |
+| `customer_province`        varchar(32) DEFAULT NULL,   |                              |
+| `customer_postal_code`     varchar(7) DEFAULT NULL,    |                              |
+| `payment_method`           varchar(32) DEFAULT NULL,   | e.g. Cash                    |
+| `SKU`                      int(11) DEFAULT NULL,       | e.g. 40725                   |
+| `quantity`                 int(11) DEFAULT NULL,       | e.g. 1, 2, 28, etc           |
+| `display_price`            decimal(15,2) DEFAULT NULL, | e.g. 4.90, 5.40, etc         |
+| `container_deposit`        decimal(15,2) DEFAULT NULL, | e.g. 0.00, 0.10, 2.90, etc   |
+| `total_doc_amount`         decimal(15,2) DEFAULT NULL, | e.g. 46.30, 50.90, etc       |
+| `return_reason_code`       varchar(32) DEFAULT NULL,   | e.g. 2                       |
+| `pipeline_sales`           varchar(64) DEFAULT NULL    | e.g. N                       |
+-----------------------------------------------------------------------------------------
+
+------------------------------------------------------------------------------------------------
+| TABLE `paymentremittance`                                                                    |
+------------------------------------------------------------------------------------------------
+| `paymentremittanceid`   int(11) NOT NULL AUTO_INCREMENT, | unique id to identify file        |
+| `payeename`             varchar(64) DEFAULT NULL,        | e.g. 'RDO BREWING VENTURES LTD'   |
+| `payeeid`               int(11) DEFAULT NULL,            | e.g. 115453                       |
+| `payeesite`             varchar(64) DEFAULT NULL,        | e.g. QUESNEL, QUESNEL DD          |
+| `paymentnumber`         int(11) DEFAULT NULL,            | e.g. 70535                        |
+| `paymentdate`           date DEFAULT NULL,               | date from the file header         |
+| `filename`              varchar(64) DEFAULT NULL,        | string representing the file name |
+| PRIMARY KEY (`paymentremittanceid`)                      | indicates it is a primary key     |
+------------------------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------------------------------------------------------
+| TABLE `paymentremittancedata`                                                                                                |
+--------------------------------------------------------------------------------------------------------------------------------
+| `paymentremittanceid`   bigint(20) DEFAULT NULL,     | fk to paymentremittance.paymentremittanceid                           |
+| `invoiceNumber`         varchar(32) DEFAULT NULL,    | e.g. 'ERS-360141-1498712', '1726COM 06-2014', 'CA-939910341'          |
+| `orderType`             varchar(32) DEFAULT NULL,    | e.g. 'BCLS Receipt', 'Claimable Adjustment', 'Customer Return',       |
+|                                                      |       'Direct Sales', 'Manual Entry'                                  |
+| `orderNumber`           varchar(32) DEFAULT NULL,    | e.g.  20140338                                                        |
+| `store`                 int(11) DEFAULT NULL,        | e.g. 3, 5, 6, 9, 10, 16, etc                                          |
+| `billOfLading`          int(11) DEFAULT NULL,        | e.g. 20140499, 201403100                                              |
+| `transactionDate`       date DEFAULT NULL,           |                                                                       |
+| `batchDate`             date DEFAULT NULL,           |                                                                       |
+| `SKU`                   int(11) DEFAULT NULL,        | e.g. 40725, 339952, 340018, etc                                       |
+| `product`               varchar(64) DEFAULT NULL,    | e.g. 'BARKERVILLE - 18 KARAT ALE', 'BARKERVILLE - 52 FOOT STOUT', etc |
+| `UPC`                   varchar(32) DEFAULT NULL,    | e.g. '00816052000017'                                                 |
+| `size`                  float DEFAULT NULL,          | e.g. 0, 0.65, 1, 1.89, 18.93, 58.667                                  |
+| `supplierID`            int(11) DEFAULT NULL,        | e.g. 10531                                                            |
+| `supplierName`          varchar(64) DEFAULT NULL,    | e.g. 'RDO BREWING VENTURES LTD. DBA'                                  |
+| `reason`                varchar(64) DEFAULT NULL,    | e.g. 'Devective Product', 'Recall / Stale - Destroy In Store', etc    |
+| `reference`             varchar(64) DEFAULT NULL,    | e.g. 25076, 32379, etc                                                |
+| `quantity`              int(11) DEFAULT NULL,        | e.g. 1, 2, 3, 4, 5, N                                                 |
+| `UOM`                   varchar(32) DEFAULT NULL,    | Unit Of Measure ? e.g. BP, Pack                                       |
+| `cost`                  decimal(15,2) DEFAULT NULL,  | e.g. 92.76, 88.25, etc                                                |
+| `GST`                   decimal(15,2) DEFAULT NULL,  | e.g. 17.29, 17.39                                                     |
+| `containerDeposit`      varchar(64) DEFAULT NULL,    | e.g. .00, 270, 30, 30.00, 60, 60.00, 90                               |
+| `freightAllowance`      varchar(64) DEFAULT NULL,    |                                                                       |
+| `total`                 decimal(15,2) DEFAULT NULL   | e.g. -3.71, 5.07, 5.38, 10.14                                         |
+--------------------------------------------------------------------------------------------------------------------------------
